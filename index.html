@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brush·n·Love — студия наращивания ресниц</title>
+<meta name="description" content="Студия наращивания ресниц Brush·n·Love: бережная техника, премиальные материалы, эффект до 4 недель. Онлайн-запись.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================= RESET / TOKENS ============================= */
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+:root{
+  --bg:#FBF6EF;
+  --bg2:#F4EADD;
+  --cream:#FFFCF7;
+  --ink:#5B4636;
+  --ink-soft:#8A715B;
+  --accent:#C08A5E;
+  --accent-deep:#A9714A;
+  --green:#7FB069;
+  --blue:#6AA8D6;
+  --vk:#6C7FD8;
+  --line:rgba(139,111,92,.18);
+  --glass:rgba(255,255,255,.52);
+  --glass-brd:rgba(255,255,255,.65);
+  --shadow:0 24px 60px -24px rgba(139,111,92,.35);
+  --r-lg:32px;
+  --r-md:22px;
+  --r-pill:999px;
+  --serif:'Cormorant Garamond', Georgia, serif;
+  --sans:'Manrope', system-ui, -apple-system, sans-serif;
+  --container:1120px;
+}
+html{ scroll-behavior:smooth; }
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.65;
+  font-size:16px;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg,video{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+::selection{ background:rgba(192,138,94,.25); }
+
+/* ============================= DECORATIVE BG ============================= */
+.bg-decor{
+  position:fixed; inset:0; z-index:-2; pointer-events:none;
+  background:
+    radial-gradient(800px 500px at 85% -10%, rgba(224,190,160,.35), transparent 60%),
+    radial-gradient(700px 500px at -10% 30%, rgba(195,158,130,.22), transparent 60%),
+    radial-gradient(600px 500px at 60% 110%, rgba(214,177,150,.25), transparent 60%),
+    var(--bg);
+}
+.bg-decor::after{
+  content:""; position:absolute; inset:0;
+  background-image:radial-gradient(rgba(139,111,92,.05) 1px, transparent 1px);
+  background-size:26px 26px;
+  mask-image:linear-gradient(160deg, transparent 30%, #000 90%);
+}
+
+/* ============================= LAYOUT HELPERS ============================= */
+.container{ width:100%; max-width:var(--container); margin:0 auto; padding:0 24px; }
+section{ padding:72px 0; }
+.section-head{ max-width:640px; margin-bottom:44px; }
+.eyebrow{
+  font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--accent-deep); font-weight:800; margin-bottom:12px;
+}
+.section-title{
+  font-family:var(--serif); font-weight:600; font-size:clamp(30px, 5vw, 44px);
+  line-height:1.12; letter-spacing:.01em; color:var(--ink);
+}
+.section-sub{ margin-top:14px; color:var(--ink-soft); font-size:16px; max-width:520px; }
+
+/* ============================= PILL BUTTONS ============================= */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:17px 34px; border-radius:var(--r-pill);
+  font-weight:700; font-size:15px; line-height:1;
+  background:linear-gradient(135deg, var(--accent) 0%, #D3A079 100%);
+  color:#fff; box-shadow:0 18px 34px -14px rgba(192,138,94,.65), inset 0 1px 0 rgba(255,255,255,.35);
+  transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+  white-space:nowrap;
+}
+.btn:hover{ transform:translateY(-2px); filter:brightness(1.04); box-shadow:0 24px 42px -16px rgba(192,138,94,.7); }
+.btn:active{ transform:translateY(0); }
+.btn-ghost{
+  background:var(--glass); border:1px solid var(--glass-brd); color:var(--ink);
+  box-shadow:0 14px 30px -18px rgba(139,111,92,.5); backdrop-filter:blur(12px);
+}
+.btn-ghost:hover{ box-shadow:0 20px 38px -18px rgba(139,111,92,.55); }
+.btn-sm{ padding:13px 24px; font-size:14px; }
+.micro{
+  display:block; margin-top:12px; font-size:13px; color:var(--ink-soft);
+  text-align:center;
+}
+.micro .heart{ color:var(--accent); }
+
+/* ============================= GLASS CARD ============================= */
+.glass{
+  background:var(--glass);
+  border:1px solid var(--glass-brd);
+  border-radius:var(--r-lg);
+  backdrop-filter:blur(14px) saturate(150%);
+  -webkit-backdrop-filter:blur(14px) saturate(150%);
+  box-shadow:var(--shadow);
+}
+
+/* ============================= PHOTO PLACEHOLDER ============================= */
+.ph{
+  position:relative; overflow:hidden;
+  border-radius:var(--r-lg);
+  background:
+    linear-gradient(150deg, #F2E6D6 0%, #E7D3BC 45%, #DFC4A8 100%);
+  border:1px solid rgba(255,255,255,.6);
+  box-shadow:inset 0 0 60px rgba(255,255,255,.35);
+  display:flex; align-items:center; justify-content:center;
+}
+.ph::before{
+  content:""; position:absolute; inset:0;
+  background:
+    radial-gradient(60% 50% at 20% 10%, rgba(255,255,255,.5), transparent 60%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 10px, transparent 10px 20px);
+}
+.ph-label{
+  position:relative; z-index:1;
+  font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent-deep); font-weight:800;
+  background:rgba(255,255,255,.5); backdrop-filter:blur(6px);
+  padding:8px 16px; border-radius:var(--r-pill); border:1px solid rgba(255,255,255,.6);
+}
+.ph-ratio-4-3{ aspect-ratio:4/3; }
+.ph-ratio-3-4{ aspect-ratio:3/4; }
+.ph-ratio-1-1{ aspect-ratio:1/1; }
+.ph-ratio-16-9{ aspect-ratio:16/9; }
+
+/* ============================= HEADER ============================= */
+.site-header{
+  position:sticky; top:0; z-index:100;
+  transition:background .3s ease, box-shadow .3s ease, border-color .3s ease;
+  border-bottom:1px solid transparent;
+  background:transparent;
+}
+.site-header.scrolled{
+  background:rgba(251,246,239,.72);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  backdrop-filter:blur(16px) saturate(160%);
+  border-bottom:1px solid var(--glass-brd);
+  box-shadow:0 10px 30px -22px rgba(139,111,92,.4);
+}
+.header-inner{ display:flex; align-items:center; gap:22px; min-height:76px; }
+.logo{ display:flex; align-items:center; gap:12px; font-weight:800; font-size:17px; color:var(--ink); font-family:var(--serif); letter-spacing:.02em; }
+.logo .mark{
+  width:40px; height:40px; border-radius:50%;
+  background:linear-gradient(135deg, var(--accent) 0%, #D8A87C 100%);
+  display:grid; place-items:center; color:#fff;
+  box-shadow:0 10px 20px -8px rgba(192,138,94,.7);
+}
+.logo .mark svg{ width:22px; height:22px; }
+.logo small{ display:block; font-family:var(--sans); font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); }
+.header-nav{ margin-left:auto; display:flex; gap:26px; }
+.header-nav a{ font-size:14px; font-weight:600; color:var(--ink-soft); transition:color .2s ease; }
+.header-nav a:hover{ color:var(--accent-deep); }
+.rating-badge{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--glass); border:1px solid var(--glass-brd);
+  padding:9px 16px; border-radius:var(--r-pill);
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  font-weight:800; font-size:14px; color:var(--ink);
+}
+.rating-badge .stars{ color:#E9A23B; letter-spacing:1px; font-size:13px; }
+.rating-badge small{ display:block; font-size:11px; font-weight:600; color:var(--ink-soft); line-height:1.1; }
+.rating-badge small b{ color:var(--ink); }
+
+/* ============================= HERO ============================= */
+.hero{ padding-top:56px; padding-bottom:40px; }
+.hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+.hero-copy h1{
+  font-family:var(--serif); font-weight:600;
+  font-size:clamp(40px, 6.4vw, 64px); line-height:1.03; letter-spacing:.005em;
+  color:var(--ink); margin:6px 0 0;
+}
+.hero-copy h1 em{ font-style:italic; color:var(--accent-deep); }
+.hero-sub{ margin-top:20px; font-size:17px; color:var(--ink-soft); max-width:470px; }
+.hero-list{ margin-top:26px; display:flex; flex-wrap:wrap; gap:10px; }
+.chip{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--glass); border:1px solid var(--glass-brd);
+  padding:9px 16px; border-radius:var(--r-pill); font-size:13px; font-weight:600; color:var(--ink);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+}
+.chip::before{ content:"✦"; color:var(--accent); font-size:11px; }
+.hero-cta{ margin-top:32px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.hero-cta .btn{ padding:20px 42px; font-size:16px; }
+.hero-media{ position:relative; }
+.hero-photo{ border-radius:64px 64px 64px 24px; }
+.hero-photo .ph{ border-radius:inherit; }
+.hero-stamp{
+  position:absolute; top:-18px; right:-12px;
+  background:linear-gradient(135deg, var(--accent) 0%, #D8A87C 100%);
+  color:#fff; border-radius:50%; width:120px; height:120px;
+  display:grid; place-items:center; text-align:center;
+  font-size:13px; font-weight:800; line-height:1.25; letter-spacing:.02em;
+  box-shadow:0 24px 44px -18px rgba(192,138,94,.8);
+  border:6px solid rgba(255,255,255,.35);
+  transform:rotate(8deg);
+}
+.hero-note{
+  position:absolute; left:-14px; bottom:26px;
+  background:var(--glass); border:1px solid var(--glass-brd);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  border-radius:20px; padding:14px 18px; font-size:13px; font-weight:700; color:var(--ink);
+  box-shadow:0 20px 40px -24px rgba(139,111,92,.6); max-width:230px;
+}
+.hero-note span{ display:block; font-weight:500; color:var(--ink-soft); margin-top:2px; }
+
+/* ============================= DIFF ============================= */
+.diff{ position:relative; }
+.diff .section-head{ max-width:560px; }
+.diff-rows{ display:grid; gap:18px; }
+.diff-row{
+  display:grid; grid-template-columns:64px 1fr auto; gap:24px; align-items:center;
+  background:var(--glass); border:1px solid var(--glass-brd); border-radius:var(--r-lg);
+  padding:26px 30px;
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  box-shadow:0 16px 40px -28px rgba(139,111,92,.4);
+  transition:transform .25s ease;
+}
+.diff-row:hover{ transform:translateY(-3px); }
+.diff-num{
+  font-family:var(--serif); font-style:italic; font-size:34px; color:var(--accent);
+  opacity:.9; text-align:center;
+}
+.diff-body h3{ font-family:var(--serif); font-size:26px; font-weight:600; margin-bottom:4px; }
+.diff-body h3 small{ display:block; font-family:var(--sans); font-size:12px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--accent-deep); margin-bottom:6px; }
+.diff-body p{ color:var(--ink-soft); font-size:15px; max-width:560px; }
+.diff-stat{
+  text-align:right; padding:12px 20px; border-left:1px dashed var(--line);
+}
+.diff-stat b{ font-family:var(--serif); font-size:32px; font-weight:700; color:var(--accent-deep); display:block; line-height:1; }
+.diff-stat span{ font-size:12px; font-weight:600; color:var(--ink-soft); letter-spacing:.04em; }
+
+/* ============================= EFFECTS ============================= */
+.effects{ background:linear-gradient(180deg, transparent, rgba(240,226,208,.5) 40%, rgba(240,226,208,.5) 60%, transparent); }
+.eff-tabs{
+  display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px;
+  background:var(--glass); border:1px solid var(--glass-brd); border-radius:var(--r-pill);
+  padding:8px; width:max-content; max-width:100%;
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+}
+.eff-tabs-wrap{ overflow-x:auto; padding-bottom:6px; scrollbar-width:thin; }
+.eff-tab{
+  padding:12px 24px; border-radius:var(--r-pill); font-weight:700; font-size:14px;
+  color:var(--ink-soft); transition:all .2s ease; white-space:nowrap;
+}
+.eff-tab:hover{ color:var(--accent-deep); }
+.eff-tab.active{
+  background:linear-gradient(135deg, var(--accent) 0%, #D3A079 100%); color:#fff;
+  box-shadow:0 12px 24px -12px rgba(192,138,94,.7);
+}
+.eff-panel{ display:none; animation:fadein .35s ease; }
+.eff-panel.active{ display:block; }
+@keyframes fadein{ from{ opacity:0; transform:translateY(10px);} to{ opacity:1; transform:none;} }
+.eff-card{ display:grid; grid-template-columns:.95fr 1.05fr; gap:0; overflow:hidden; }
+.eff-media{ padding:0; }
+.eff-media .ph{ border-radius:0; border:none; height:100%; min-height:320px; }
+.eff-info{ padding:38px 40px; display:flex; flex-direction:column; gap:16px; }
+.eff-info .kicker{ font-size:12px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--accent-deep); }
+.eff-info h3{ font-family:var(--serif); font-weight:600; font-size:clamp(28px, 4vw, 38px); }
+.eff-info p{ color:var(--ink-soft); font-size:15px; }
+.eff-meta{ display:flex; align-items:center; gap:22px; margin-top:6px; flex-wrap:wrap; }
+.eff-price{ font-family:var(--serif); font-size:34px; font-weight:700; color:var(--ink); }
+.eff-price small{ font-family:var(--sans); font-size:13px; font-weight:600; color:var(--ink-soft); display:block; line-height:1.2; }
+.eff-badge{
+  background:rgba(192,138,94,.14); color:var(--accent-deep);
+  border:1px solid rgba(192,138,94,.3); padding:6px 14px; border-radius:var(--r-pill);
+  font-size:12px; font-weight:800; letter-spacing:.06em;
+}
+.eff-cta{ margin-top:auto; }
+.eff-cta .btn{ width:100%; }
+
+/* ============================= FREE WINDOWS ============================= */
+.windows-inner{
+  position:relative; overflow:hidden;
+  border-radius:44px; padding:56px 56px;
+  background:linear-gradient(120deg, #EFDCC6 0%, #E4C9AA 55%, #D8B48F 100%);
+  box-shadow:var(--shadow);
+  text-align:center; color:var(--ink);
+}
+.windows-inner::before{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(60% 80% at 15% 0%, rgba(255,255,255,.5), transparent 55%),
+             radial-gradient(50% 70% at 90% 100%, rgba(255,255,255,.35), transparent 55%);
+}
+.windows-inner > *{ position:relative; z-index:1; }
+.windows-inner .eyebrow{ color:var(--accent-deep); }
+.windows-inner h2{ font-family:var(--serif); font-weight:600; font-size:clamp(30px, 5vw, 46px); line-height:1.1; margin:14px 0 10px; }
+.windows-inner p{ color:#7a5c43; font-size:16px; max-width:520px; margin:0 auto; }
+.windows-slots{
+  display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:28px 0 8px;
+}
+.wslot{
+  background:rgba(255,255,255,.35); border:1px solid rgba(255,255,255,.5);
+  border-radius:18px; padding:14px 20px; min-width:120px;
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  transition:transform .2s ease, background .2s ease;
+}
+.wslot:hover{ transform:translateY(-3px); background:rgba(255,255,255,.5); }
+.wslot b{ display:block; font-size:13px; }
+.wslot span{ font-size:12px; color:#7a5c43; font-weight:600; }
+.wslot.taken{ opacity:.45; text-decoration:line-through; pointer-events:none; }
+.windows-cta{ margin-top:26px; }
+.countdown-note{
+  margin-top:16px; font-size:13px; font-weight:700; color:#8a5a33; letter-spacing:.04em;
+}
+
+/* ============================= PORTFOLIO ============================= */
+.portfolio .section-head{ margin-bottom:26px; }
+.strip-hint{
+  font-size:12px; color:var(--ink-soft); display:inline-flex; align-items:center; gap:8px;
+  margin-bottom:14px; font-weight:600;
+}
+.strip-hint svg{ width:16px; height:16px; }
+.photo-strip{
+  display:flex; gap:16px; overflow-x:auto; padding:4px 4px 22px;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+  scrollbar-width:none; cursor:grab;
+}
+.photo-strip::-webkit-scrollbar{ height:0; display:none; }
+.photo-strip.dragging{ cursor:grabbing; user-select:none; }
+.photo-strip.dragging *{ pointer-events:none; }
+.strip-item{
+  scroll-snap-align:center; flex:0 0 auto; width:260px; position:relative;
+}
+.strip-item .ph{ height:340px; border-radius:26px; }
+.strip-item.has-video .ph{
+  background:linear-gradient(150deg, #D9C3A8 0%, #C4A17E 100%);
+}
+.strip-play{
+  position:absolute; inset:0; display:grid; place-items:center; z-index:1;
+}
+.strip-play span{
+  width:60px; height:60px; border-radius:50%;
+  background:rgba(255,255,255,.55); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.7);
+  display:grid; place-items:center; color:var(--accent-deep);
+}
+.strip-play svg{ width:22px; height:22px; margin-left:3px; }
+.strip-caption{ position:absolute; bottom:12px; left:12px; right:12px; text-align:center; }
+
+/* ============================= STEPS ============================= */
+.steps-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+.step-card{
+  background:var(--glass); border:1px solid var(--glass-brd); border-radius:var(--r-lg);
+  padding:28px 26px; position:relative; overflow:hidden;
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  box-shadow:0 16px 40px -30px rgba(139,111,92,.5);
+  transition:transform .25s ease;
+}
+.step-card:hover{ transform:translateY(-4px); }
+.step-card .num{
+  font-family:var(--serif); font-style:italic; font-size:46px; color:var(--accent);
+  opacity:.35; line-height:1; position:absolute; top:16px; right:20px;
+}
+.step-card .ico{
+  width:52px; height:52px; border-radius:18px; margin-bottom:16px;
+  display:grid; place-items:center; color:var(--accent-deep);
+  background:linear-gradient(135deg, rgba(192,138,94,.16), rgba(216,168,124,.3));
+  border:1px solid rgba(192,138,94,.25);
+}
+.step-card .ico svg{ width:26px; height:26px; }
+.step-card h3{ font-family:var(--serif); font-size:22px; font-weight:600; margin-bottom:6px; }
+.step-card p{ font-size:14px; color:var(--ink-soft); }
+.steps-foot{ margin-top:22px; text-align:center; color:var(--ink-soft); font-size:14px; font-weight:600; }
+
+/* ============================= REVIEWS ============================= */
+.reviews{ background:linear-gradient(180deg, transparent, rgba(240,226,208,.5) 30%, rgba(240,226,208,.5) 70%, transparent); }
+.rev-strip{
+  display:flex; gap:16px; overflow-x:auto; padding:4px 4px 22px;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+  scrollbar-width:none; cursor:grab;
+}
+.rev-strip::-webkit-scrollbar{ height:0; display:none; }
+.rev-strip.dragging{ cursor:grabbing; user-select:none; }
+.rev-strip.dragging *{ pointer-events:none; }
+.rev-card{
+  scroll-snap-align:start; flex:0 0 auto; width:340px;
+  background:var(--glass); border:1px solid var(--glass-brd); border-radius:var(--r-lg);
+  padding:26px 26px 22px; display:flex; flex-direction:column; gap:14px;
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  box-shadow:0 18px 44px -30px rgba(139,111,92,.55);
+}
+.rev-head{ display:flex; align-items:center; gap:14px; }
+.rev-ava{
+  width:46px; height:46px; border-radius:50%; flex:0 0 auto;
+  background:linear-gradient(135deg, #E3CDB2, #CBA882);
+  border:1px solid rgba(255,255,255,.7);
+  display:grid; place-items:center; font-weight:800; color:#fff; font-size:16px;
+}
+.rev-who b{ display:block; font-size:14px; color:var(--ink); }
+.rev-who span{ font-size:12px; color:var(--ink-soft); }
+.rev-stars{ margin-left:auto; color:#E9A23B; font-size:13px; letter-spacing:1px; }
+.rev-card p.clamp{
+  font-size:14px; color:var(--ink-soft);
+  display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden;
+}
+.rev-card .review-full{ display:none; }
+.rev-more{
+  align-self:flex-start; font-size:13px; font-weight:700; color:var(--accent-deep);
+  border-bottom:1px dashed rgba(169,113,74,.5); transition:opacity .2s ease;
+}
+.rev-more:hover{ opacity:.7; }
+
+/* ============================= ABOUT ============================= */
+.about-grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:56px; align-items:center; }
+.about-photo-wrap{ position:relative; }
+.about-photo-wrap .ph{ border-radius:220px 220px 36px 36px; }
+.about-exp-badge{
+  position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+  background:var(--glass); border:1px solid var(--glass-brd);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  border-radius:var(--r-pill); padding:12px 20px; font-weight:800; font-size:14px;
+  box-shadow:0 20px 40px -24px rgba(139,111,92,.6); white-space:nowrap;
+}
+.about-text .section-title{ font-size:clamp(28px, 4vw, 40px); }
+.about-text .section-sub{ margin-top:12px; }
+.about-text p.body{ margin-top:16px; color:var(--ink-soft); font-size:15px; }
+.about-perks{ margin:22px 0; display:grid; gap:10px; }
+.about-perks li{ display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--ink); }
+.about-perks li::before{ content:"✓"; color:var(--accent); font-weight:800; }
+.messengers{ display:flex; gap:12px; flex-wrap:wrap; margin-top:8px; }
+.messengers .btn{ padding:14px 24px; font-size:14px; }
+.wa{ background:linear-gradient(135deg,#63B05B,#4E9C48); box-shadow:0 14px 28px -12px rgba(99,176,91,.7); }
+.tg{ background:linear-gradient(135deg,#3FA6E0,#2F8ECC); box-shadow:0 14px 28px -12px rgba(63,166,224,.7); }
+.vk{ background:linear-gradient(135deg,#5B7BDB,#4A68C0); box-shadow:0 14px 28px -12px rgba(91,123,219,.7); }
+.messengers svg{ width:18px; height:18px; }
+
+/* ============================= PLACE ============================= */
+.place-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:stretch; }
+.place-photo .ph{ height:100%; min-height:360px; }
+.place-card{
+  border-radius:var(--r-lg); padding:36px 38px;
+  display:flex; flex-direction:column; gap:8px; justify-content:center;
+}
+.place-card h3{ font-family:var(--serif); font-weight:600; font-size:30px; }
+.place-line{ display:flex; gap:14px; align-items:flex-start; margin-top:14px; }
+.place-ico{
+  width:42px; height:42px; flex:0 0 auto; border-radius:14px;
+  background:rgba(192,138,94,.14); border:1px solid rgba(192,138,94,.25);
+  display:grid; place-items:center; color:var(--accent-deep);
+}
+.place-ico svg{ width:20px; height:20px; }
+.place-line b{ display:block; font-size:14px; }
+.place-line p{ font-size:14px; color:var(--ink-soft); }
+.place-cta{ margin-top:22px; }
+
+/* ============================= FAQ ============================= */
+.faq-list{ max-width:760px; margin:0 auto; display:grid; gap:14px; }
+.faq-item{
+  background:var(--glass); border:1px solid var(--glass-brd); border-radius:var(--r-md);
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  overflow:hidden; transition:box-shadow .25s ease;
+}
+.faq-item.open{ box-shadow:0 20px 44px -30px rgba(139,111,92,.55); }
+.faq-q{
+  width:100%; display:flex; align-items:center; gap:16px; text-align:left;
+  padding:22px 26px; font-weight:700; font-size:16px; color:var(--ink);
+}
+.faq-ic{
+  width:30px; height:30px; flex:0 0 auto; border-radius:50%; margin-left:auto;
+  background:rgba(192,138,94,.14); border:1px solid rgba(192,138,94,.3);
+  display:grid; place-items:center; color:var(--accent-deep);
+  transition:transform .3s ease, background .3s ease;
+}
+.faq-ic svg{ width:14px; height:14px; }
+.faq-item.open .faq-ic{ transform:rotate(45deg); background:linear-gradient(135deg,var(--accent),#D3A079); color:#fff; }
+.faq-a{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+.faq-a-inner{ padding:0 26px 24px 26px; color:var(--ink-soft); font-size:15px; }
+
+/* ============================= MEMO ============================= */
+.memo-card{
+  border-radius:44px; padding:48px 52px;
+  background:linear-gradient(120deg, #F4EADD 0%, #EDDCC6 100%);
+  border:1px solid rgba(255,255,255,.7);
+}
+.memo-card h2{ font-family:var(--serif); font-weight:600; font-size:clamp(28px,4vw,40px); margin-bottom:6px; }
+.memo-card .section-sub{ margin-bottom:26px; }
+.memo-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.memo-item{
+  background:rgba(255,255,255,.5); border:1px solid rgba(255,255,255,.7);
+  border-radius:var(--r-md); padding:20px 22px; display:flex; gap:14px; align-items:flex-start;
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+}
+.memo-item .n{
+  width:30px; height:30px; flex:0 0 auto; border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),#D3A079); color:#fff;
+  display:grid; place-items:center; font-weight:800; font-size:14px;
+}
+.memo-item p{ font-size:13.5px; color:var(--ink); font-weight:600; line-height:1.5; }
+.memo-item p small{ display:block; font-weight:500; color:var(--ink-soft); margin-top:2px; }
+
+/* ============================= FOOTER ============================= */
+.site-footer{ padding:56px 0 40px; margin-top:24px; background:linear-gradient(180deg, transparent, rgba(234,216,194,.55)); }
+.footer-cards{ display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:stretch; margin-bottom:44px; }
+.ref-card{
+  border-radius:var(--r-lg); padding:38px 42px;
+  background:linear-gradient(120deg, #E8D2B6 0%, #D9B48F 100%);
+  color:var(--ink); position:relative; overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.ref-card h3{ font-family:var(--serif); font-weight:600; font-size:32px; line-height:1.1; }
+.ref-card p{ margin-top:10px; font-size:15px; color:#7a5c43; max-width:420px; }
+.ref-card .btn{ margin-top:22px; background:#fff; color:var(--accent-deep); box-shadow:0 16px 32px -16px rgba(90,60,35,.6); }
+.contacts-card{ display:flex; flex-direction:column; justify-content:center; gap:16px; }
+.contacts-card .row{ display:flex; align-items:center; gap:14px; font-size:15px; font-weight:600; }
+.contacts-card .row .place-ico{ width:38px; height:38px; }
+.footer-bottom{
+  display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  border-top:1px solid var(--line); padding-top:24px;
+  font-size:13px; color:var(--ink-soft);
+}
+.footer-soc{ display:flex; gap:10px; }
+.footer-soc a{
+  display:inline-flex; align-items:center; gap:8px; padding:9px 16px;
+  background:var(--glass); border:1px solid var(--glass-brd); border-radius:var(--r-pill);
+  font-size:13px; font-weight:700; color:var(--ink); transition:transform .2s ease;
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+}
+.footer-soc a:hover{ transform:translateY(-2px); }
+
+/* ============================= MODAL ============================= */
+.modal{
+  position:fixed; inset:0; z-index:200; display:none;
+  align-items:center; justify-content:center; padding:24px;
+  background:rgba(80,58,40,.35);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+}
+.modal.open{ display:flex; }
+.modal-card{
+  background:rgba(255,252,247,.92); border:1px solid var(--glass-brd);
+  border-radius:var(--r-lg); max-width:560px; width:100%;
+  padding:36px 38px; position:relative; max-height:86vh; overflow-y:auto;
+  -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px);
+  box-shadow:0 40px 80px -30px rgba(80,58,40,.5);
+  animation:fadein .3s ease;
+}
+.modal-close{
+  position:absolute; top:18px; right:18px; width:38px; height:38px; border-radius:50%;
+  display:grid; place-items:center;
+  background:rgba(192,138,94,.12); border:1px solid rgba(192,138,94,.25); color:var(--ink-soft);
+  transition:all .2s ease;
+}
+.modal-close:hover{ transform:rotate(90deg); color:var(--accent-deep); }
+.modal-card h3{ font-family:var(--serif); font-weight:600; font-size:30px; margin:6px 0 16px; }
+.modal-card .rev-stars{ font-size:15px; margin-bottom:14px; }
+.modal-card .m-text{ font-size:15px; color:var(--ink-soft); }
+.modal-card .m-who{ font-weight:800; margin-top:18px; font-size:14px; }
+.modal-card .m-when{ font-size:12px; color:var(--ink-soft); }
+.modal-form{ display:grid; gap:14px; margin-top:20px; }
+.field{ display:grid; gap:6px; }
+.field label{ font-size:13px; font-weight:700; color:var(--ink); }
+.field input,
+.field select{
+  width:100%; padding:15px 18px; border-radius:16px; border:1px solid var(--line);
+  background:rgba(255,255,255,.7); font-family:inherit; font-size:15px; color:var(--ink);
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.field input:focus, .field select:focus{
+  outline:none; border-color:var(--accent);
+  box-shadow:0 0 0 4px rgba(192,138,94,.15);
+}
+.form-note{ font-size:12px; color:var(--ink-soft); text-align:center; }
+.form-success{ text-align:center; padding:20px 0 10px; }
+.form-success .ok{
+  width:72px; height:72px; margin:0 auto 18px; border-radius:50%;
+  background:linear-gradient(135deg, var(--accent), #D3A079); color:#fff;
+  display:grid; place-items:center; font-size:34px;
+  box-shadow:0 20px 40px -18px rgba(192,138,94,.8);
+}
+.form-success h4{ font-family:var(--serif); font-size:32px; font-weight:600; }
+.form-success p{ color:var(--ink-soft); font-size:14px; margin-top:8px; }
+
+/* ============================= REVEAL ============================= */
+.reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1); }
+.reveal.in{ opacity:1; transform:none; }
+
+/* ============================= RESPONSIVE ============================= */
+@media (max-width:980px){
+  .header-nav{ display:none; }
+  .hero-grid{ grid-template-columns:1fr; gap:44px; }
+  .hero-media{ max-width:520px; margin:0 auto; width:100%; }
+  .diff-row{ grid-template-columns:52px 1fr; }
+  .diff-stat{ grid-column:1/-1; text-align:left; border-left:none; border-top:1px dashed var(--line); padding:14px 0 0; margin-top:6px; }
+  .eff-card{ grid-template-columns:1fr; }
+  .eff-media .ph{ min-height:260px; aspect-ratio:4/3; }
+  .steps-grid{ grid-template-columns:repeat(2,1fr); }
+  .about-grid{ grid-template-columns:1fr; gap:40px; }
+  .about-photo-wrap{ max-width:400px; margin:0 auto; }
+  .place-grid{ grid-template-columns:1fr; }
+  .footer-cards{ grid-template-columns:1fr; }
+  .memo-grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:640px){
+  section{ padding:54px 0; }
+  .hero{ padding-top:36px; }
+  .hero-photo{ border-radius:44px 44px 44px 20px; }
+  .hero-stamp{ width:96px; height:96px; font-size:11px; top:-12px; right:-6px; border-width:5px; }
+  .hero-note{ left:10px; right:10px; bottom:-18px; max-width:none; text-align:center; }
+  .windows-inner{ padding:42px 24px; border-radius:32px; }
+  .memo-card{ padding:36px 24px; border-radius:32px; }
+  .memo-grid{ grid-template-columns:1fr; }
+  .steps-grid{ grid-template-columns:1fr; }
+  .eff-info{ padding:28px 22px; }
+  .strip-item{ width:220px; }
+  .strip-item .ph{ height:290px; }
+  .rev-card{ width:290px; }
+  .ref-card{ padding:30px 26px; }
+  .place-card{ padding:28px 24px; }
+  .modal-card{ padding:32px 24px; }
+  .eff-tabs{ width:100%; }
+  .eff-tab{ flex:1; text-align:center; }
+  .hero-cta .btn{ width:100%; }
+}
+</style>
+</head>
+<body>
+<div class="bg-decor" aria-hidden="true"></div>
+
+<!-- ================================= HEADER ================================= -->
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a class="logo" href="#top">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4 0-7-2.6-7-6.5C5 9 9 4 12 3c3 1 7 6 7 11.5 0 3.9-3 6.5-7 6.5Z"/><path d="M9.5 13.5c1.5-2.5 3.5-4 5.5-4.5"/><path d="M8.8 16.5c1.6-2 3.4-3.2 5.4-3.7"/></svg>
+      </span>
+      <span>Brush·n·Love<small>студия ресниц</small></span>
+    </a>
+    <nav class="header-nav" aria-label="Основное меню">
+      <a href="#diff">Подход</a>
+      <a href="#effects">Эффекты</a>
+      <a href="#portfolio">Работы</a>
+      <a href="#steps">Процесс</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="rating-badge">
+      <span class="stars">★★★★★</span>
+      <span><small>рейтинг</small>★ 4.9</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ================================= HERO ================================= -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Наращивание ресниц · Brush-n-Love</p>
+          <h1>Проснулась — и уже <em>красивая</em>. Ресницы, которые не нужно красить</h1>
+          <p class="hero-sub">Бережная техника «ресница к реснице», премиальные материалы и эффект до 4 недель. Подбираем форму под твои глаза — получается максимум натурально.</p>
+          <ul class="hero-list">
+            <li class="chip">Опыт мастера более 7 лет</li>
+            <li class="chip">1500+ довольных клиенток</li>
+            <li class="chip">Гарантия 21+ день</li>
+          </ul>
+          <div class="hero-cta">
+            <button class="btn" data-open-booking>Записаться</button>
+            <span class="micro">Ответим в чате за 15 минут · без предоплаты <span class="heart">♥</span></span>
+          </div>
+        </div>
+        <div class="hero-media reveal">
+          <div class="ph hero-photo ph-ratio-4-5" style="aspect-ratio:4/5">
+            <span class="ph-label">Фото 1 — героиня</span>
+          </div>
+          <div class="hero-stamp">—20% новым гостям на первое наращивание</div>
+          <div class="hero-note">Ближайшие окна: <span>сегодня 15:00, сб 10:00</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= DIFF ================================= -->
+  <section class="diff" id="diff">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Чем отличаемся</p>
+        <h2 class="section-title">Три причины, почему ресницы держатся долго и выглядят как свои</h2>
+      </div>
+      <div class="diff-rows">
+        <div class="diff-row reveal">
+          <div class="diff-num">01</div>
+          <div class="diff-body">
+            <h3><small>Как делаем</small>Техника, которая не вредит</h3>
+            <p>Работаем по методике «ресница к реснице»: одну искусственную ресницу крепим к одной родной. Никаких пучков и клеевых «слезок» — родные ресницы дышат и не ломаются.</p>
+          </div>
+          <div class="diff-stat"><b>21+</b><span>день держится эффект</span></div>
+        </div>
+        <div class="diff-row reveal">
+          <div class="diff-num">02</div>
+          <div class="diff-body">
+            <h3><small>Кто делает</small>Мастер, который любит моно-работы</h3>
+            <p>Каждая процедура занимает от 2 часов — без «конвейера» и спешки. Взгляд отдыхает, вы — успеваете расслабиться и выпить кофе, а я слежу за каждым миллиметром.</p>
+          </div>
+          <div class="diff-stat"><b>7+</b><span>лет практики</span></div>
+        </div>
+        <div class="diff-row reveal">
+          <div class="diff-num">03</div>
+          <div class="diff-body">
+            <h3><small>Материалы</small>Премиум и гипоаллергенно</h3>
+            <p>Японские и корейские ресницы, ультрастойкий клей, который не сушит глаза и не вызывает слезотечения. Подбираем толщину и изгиб под твою форму глаза.</p>
+          </div>
+          <div class="diff-stat"><b>100%</b><span>гипоаллергенно</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= EFFECTS ================================= -->
+  <section class="effects" id="effects">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Каталог эффектов</p>
+        <h2 class="section-title">Выбери свой взгляд</h2>
+        <p class="section-sub">Нажми на эффект — посмотри цену, описание и фото. Любой эффект при желании сделаем «мягче» или «выразительнее».</p>
+      </div>
+
+      <div class="eff-tabs-wrap reveal">
+        <div class="eff-tabs" role="tablist">
+          <button class="eff-tab active" data-tab="classic" role="tab">Классика</button>
+          <button class="eff-tab" data-tab="wet" role="tab">Мокрый</button>
+          <button class="eff-tab" data-tab="d15" role="tab">1,5D</button>
+          <button class="eff-tab" data-tab="d2" role="tab">2D</button>
+          <button class="eff-tab" data-tab="d3" role="tab">3D</button>
+        </div>
+      </div>
+
+      <div class="glass eff-card reveal">
+        <div class="eff-media">
+          <div class="ph ph-ratio-4-3" id="effPhoto"><span class="ph-label">Фото — Классика</span></div>
+        </div>
+        <div class="eff-info" id="effPanel">
+          <span class="kicker" id="effKicker">Натуральный эффект</span>
+          <h3 id="effTitle">Классика</h3>
+          <p id="effDesc">Одна ресница на одну родную. Максимально естественно: изменения видят все, а секрет не выдают ресницы. Идеальный выбор «на каждый день» и для первого наращивания.</p>
+          <div class="eff-meta">
+            <div class="eff-price" id="effPrice">2 700 ₽<small>коррекция — 1 300 ₽</small></div>
+            <div class="eff-badge">первое посещение · −20%</div>
+          </div>
+          <div class="eff-cta">
+            <button class="btn" data-open-booking>Хочу такой взгляд</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= FREE WINDOWS ================================= -->
+  <section class="windows" id="windows">
+    <div class="container">
+      <div class="windows-inner glass reveal">
+        <p class="eyebrow">Свободные окна</p>
+        <h2>На этой неделе осталось всего <br>3 свободных окна</h2>
+        <p>Запись держится без предоплаты. Если не успеешь сейчас — придётся ждать новое место до двух недель.</p>
+        <div class="windows-slots">
+          <div class="wslot"><b>Сегодня · 15:00</b><span>1,5–2 часа</span></div>
+          <div class="wslot"><b>Суббота · 10:00</b><span>1,5–2 часа</span></div>
+          <div class="wslot"><b>Воскресенье · 12:30</b><span>1,5–2 часа</span></div>
+          <div class="wslot taken"><b>Четверг · 18:00</b><span>уже занято</span></div>
+        </div>
+        <div class="windows-cta">
+          <button class="btn btn-ghost" data-open-booking>Забронировать окно</button>
+          <span class="micro">Отправьте «хочу окно» в чат — подберём удобное время <span class="heart">♥</span></span>
+        </div>
+        <div class="countdown-note">⏳ 3 окна · закрываем запись на этой неделе после заполнения</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= PORTFOLIO ================================= -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Портфолио</p>
+        <h2 class="section-title">Работы и живые видео</h2>
+        <p class="section-sub">Реальные процедуры из студии. Видео запускается само, когда доскроллишь до него — смотри, как «живут» ресницы в движении.</p>
+      </div>
+      <p class="strip-hint reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        Листай влево — здесь 30 фото и 3 видео
+      </p>
+      <div class="photo-strip reveal" id="portfolioStrip">
+        <!-- ФОТО 1..30: 30 шт. Замени каждый блок .ph на <img class="ph-real"> -->
+        <!-- ВИДЕО: 3 шт.Заполни data-src и укажи poster, если нужно -->
+        <div class="strip-item"><div class="ph ph-ratio-3-4"><span class="ph-label">Фото 1</span></div></div>
+        <div class="strip-item"><div class="ph ph-ratio-3-4"><span class="ph-label">Фото 2</span></div></div>
+        <div class="strip-item"><div class="ph ph-ratio-3-4"><span class="ph-label">Фото 3</span></div></div>
+        <div class="strip-item"><div class="ph ph-ratio-3-4"><span class="ph-label">Фото 4</span></div></div>
+        <div class="strip-item has-video">
+          <div class="ph ph-ratio-3-4"><span class="ph-label">Видео 1</span></div>
+          <div class="strip-play"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+          <div class="strip-caption"><span class="ph-label" style="background:rgba(255,255,255,.55)">автовоспроизведение без звука</span></div>
+        </div>
+        <div class="strip-item"><div class="ph ph-ratio-3-4"><span class="ph-label">Фото 5</span></div></div>
+        <div class="strip-item"><div class="ph ph-ratio-3-4"><span class="ph-label">Фото 6</span></div></div>
+        <div class="strip-item"><div class="ph ph-ratio-3-4"><span class="ph-label">Фото 7</span></div></div>
+        <div class="strip-item"><div class="ph ph-ratio-3-4"><span class="ph-label">Фото 8</span></div></div>
+        <div class="strip-item has-video">
+          <div class="ph ph-ratio-3-4"><span class="ph-label">Видео 2</span></div>
+          <div class="strip-play"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+        </div>
+        <div class="strip-item"><div class="ph ph-ratio-3-4"><span class="ph-label">Фото 9</span></div></div>
+        <div class="strip-item"><div class="ph ph-ratio-3-4"><span class="ph-label">Фото 10</span></div></div>
+        <div class="strip-item"><div class="ph ph-ratio-3-4"><span class="ph-label">Фото 11</span></div></div>
+        <div class="strip-item"><div class="ph ph-ratio-3-4"><span class="ph-label">Фото 12</span></div></div>
+        <div class="strip-item has-video">
+          <div class="ph ph-ratio-3-4"><span class="ph-label">Видео 3</span></div>
+          <div class="strip-play"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+        </div>
+      </div>
+
+      <!-- Настоящие видео: замени блоки .strip-item.has-video на такие карточки:
+      <div class="strip-item has-video">
+        <video class="ph ph-ratio-3-4" muted loop playsinline preload="metadata" data-src="video/1.mp4" poster="photo/poster-1.jpg"></video>
+        <div class="strip-play"><span>&#9654;</span></div>
+      </div>
+      JS сам поставит src из data-src и запустит воспроизведение при появлении на экране. -->
+    </div>
+  </section>
+
+  <!-- ================================= STEPS ================================= -->
+  <section class="steps" id="steps">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Как проходит процедура</p>
+        <h2 class="section-title">От кофе до финального взгляда в зеркало</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card reveal">
+          <span class="num">01</span>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3>Консультация·15 мин</h3>
+          <p>Обсуждаем желаемый эффект, длину, изгиб. Подбираем под твою форму глаза и образ жизни.</p>
+        </div>
+        <div class="step-card reveal">
+          <span class="num">02</span>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4 .8 4.5 2-.5 1.2-2 2.4-3 2.6 1.5.3 3 1.3 3 3 0 .5-.5 1-1.5 1.5 1 .5 1.5 1.3 1.5 2.4 0 1.3-1 2.5-2 3.2"/></svg></div>
+          <h3>Подготовка·20 мин</h3>
+          <p>Снимаем макияж, обезжириваем и изолируем каждую родную ресницу — чтобы ничего не склеилось.</p>
+        </div>
+        <div class="step-card reveal">
+          <span class="num">03</span>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4 0-7-2.6-7-6.5C5 9 9 4 12 3c3 1 7 6 7 11.5 0 3.9-3 6.5-7 6.5Z"/><path d="M9.5 13.5c1.5-2.5 3.5-4 5.5-4.5"/></svg></div>
+          <h3>Наращивание·1–1,5 ч</h3>
+          <p>Самый приятный этап: ты дремлешь или смотришь сериал, а я аккуратно ставлю каждую ресничку.</p>
+        </div>
+        <div class="step-card reveal">
+          <span class="num">04</span>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-6 6 6 6 0 0 0 6-6Z"/><path d="M4 20a12 12 0 0 1 16 0"/></svg></div>
+          <h3>Финал·10 мин</h3>
+          <p>Показываю результат, выдаю памятку по уходу и при желании делаем фото для портфолио.</p>
+        </div>
+      </div>
+      <p class="steps-foot reveal">Всего ~2 часа. Как правило, гости выходят с кофе в руках и отличным настроением.</p>
+    </div>
+  </section>
+
+  <!-- ================================= REVIEWS ================================= -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Отзывы</p>
+        <h2 class="section-title">1500+ девушек уже записались</h2>
+        <p class="section-sub">Рейтинг 4.9 из 5 на Яндекс Картах и в рекомендациях подруг.</p>
+      </div>
+      <div class="rev-strip reveal" id="revStrip">
+        <article class="rev-card">
+          <div class="rev-head">
+            <div class="rev-ava">А</div>
+            <div class="rev-who"><b>Алина</b><span>2 месяца назад</span></div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
+          <p class="clamp">Хожу уже полгода и ни разу не захотела сменить мастера. Ресницы всегда одинаково ровные, без «слепых зон», держатся больше трёх недель. Отдельное спасибо за то, что не навязывают объёмы — сделали классику, хотя я пришла с запросом «поярче».</p>
+          <div class="review-full">Хожу уже полгода и ни разу не захотела сменить мастера. Ресницы всегда одинаково ровные, без «слепых зон», держатся больше трёх недель. Отдельное спасибо за то, что не навязывают объёмы — сделали классику, хотя я пришла с запросом «поярче». Консультант в переписке отвечает быстро, записаться можно за 5 минут. Расположение удобное: 4 минуты от метро. Внутри уютно, всегда предложат воду и кофе. Однозначно рекомендую всем подругам.</div>
+          <button class="rev-more" data-review-more>Читать полностью</button>
+        </article>
+
+        <article class="rev-card">
+          <div class="rev-head">
+            <div class="rev-ava">М</div>
+            <div class="rev-who"><b>Мария</b><span>1 месяц назад</span></div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
+          <p class="clamp">Взяла «мокрый эффект» на пробу — и осталась в восторге! Взгляд стал выразительнее, но при этом всё очень естественно. В бассейн и сауну хожу спокойно, ресницы не осыпаются.</p>
+          <div class="review-full">Взяла «мокрый эффект» на пробу — и осталась в восторге! Взгляд стал выразительнее, но при этом всё очень естественно. В бассейн и сауну хожу спокойно, ресницы не осыпаются. Мастер очень аккуратная, постоянно уточняет комфорт, подкладывает подушку. Приятно, когда человек действительно любит своё дело.</div>
+          <button class="rev-more" data-review-more>Читать полностью</button>
+        </article>
+
+        <article class="rev-card">
+          <div class="rev-head">
+            <div class="rev-ava">К</div>
+            <div class="rev-who"><b>Ксения</b><span>неделю назад</span></div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
+          <p class="clamp">Боялась, что родные ресницы испортятся, — прошло 4 месяца, а они стали даже лучше. Оказывается, главное — это техника и хороший клей. Спасибо за честные консультации!</p>
+          <button class="rev-more" data-review-more>Читать полностью</button>
+        </article>
+
+        <article class="rev-card">
+          <div class="rev-head">
+            <div class="rev-ava">Д</div>
+            <div class="rev-who"><b>Дарья</b><span>3 недели назад</span></div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
+          <p class="clamp">У меня глаза стали очень чувствительными после неудачного опыта в другом салоне. Здесь всё прошло мягко: в конце даже не поняла, когда поставили последнюю ресничку. Взгляд свежий, никаких слез и красноты.</p>
+          <button class="rev-more" data-review-more>Читать полностью</button>
+        </article>
+
+        <article class="rev-card">
+          <div class="rev-head">
+            <div class="rev-ava">В</div>
+            <div class="rev-who"><b>Виктория</b><span>два дня назад</span></div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
+          <p class="clamp">Взяла 2D для свадьбы сестры. Три недели спокойно проходила — ни одной упавшей ресницы до коррекции. Фото получились шикарные, взгляд на них «горит».</p>
+          <button class="rev-more" data-review-more>Читать полностью</button>
+        </article>
+
+        <article class="rev-card">
+          <div class="rev-head">
+            <div class="rev-ava">Е</div>
+            <div class="rev-who"><b>Елена</b><span>2 недели назад</span></div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
+          <p class="clamp">Очень удобная онлайн-запись: выбрала время в три клика, напомнили накануне. Пришла без распечаток и записей — мастер сама предложила эффект под форму глаз. Теперь только сюда!</p>
+          <button class="rev-more" data-review-more>Читать полностью</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= ABOUT ================================= -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-photo-wrap reveal">
+          <div class="ph ph-ratio-3-4"><span class="ph-label">Фото — мастер</span></div>
+          <div class="about-exp-badge">✨ Мастер · стаж 7+ лет</div>
+        </div>
+        <div class="about-text reveal">
+          <p class="eyebrow">Обо мне</p>
+          <h2 class="section-title">Привет! Я Аня, мастер студии Brush·n·Love</h2>
+          <p class="section-sub">Создаю «свои, только лучше» ресницы уже 7 лет. За это время сделала более 1500 наращиваний.</p>
+          <p class="body">Обожаю, когда девушка приходит на процедуру как на маленький праздник — с чашечкой кофе, под плейлист и разговоры обо всём на свете. Ценю доверие, а ещё больше — естественность результата: ресницы должны подчёркивать твою красоту, а не «носить» тебя.</p>
+          <ul class="about-perks">
+            <li>Сертифицированный мастер, ежегодные обучения и воркшопы</li>
+            <li>Работаю только на проверенных материалах премиум-сегмента</li>
+            <li>Даю гарантию 21+ день на каждое наращивание</li>
+          </ul>
+          <div class="messengers">
+            <a class="btn wa" href="https://wa.me/79991234567" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.6 14.2c-.2.7-1.2 1.3-1.9 1.4-.7.1-1.4.3-4-.8-3.3-1.5-5.4-4.9-5.6-5.2-.2-.3-1.3-1.8-1.3-3.4s.8-2.4 1.1-2.8c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.5c.1.2.1.4 0 .5l-.4.6c-.2.2-.4.5-.2.8.2.4.9 1.5 2 2.5 1.4 1.3 2.6 1.7 3 1.9.3.2.5.1.7-.1l.8-1c.2-.3.4-.2.7-.1l2.3 1.1c.3.2.6.3.6.4.1.2.1.7 0 1.2Z"/></svg>WhatsApp</a>
+            <a class="btn tg" href="https://t.me/brushnlove" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 19c-.2 1-.9 1.2-1.8.8l-5-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1L18.1 6c.4-.3-.1-.5-.6-.2L6.4 12.2 1.4 10.7c-1-.3-1-1 .2-1.4L20.5 3c.9-.3 1.6.2 1.4 1.3Z"/></svg>Telegram</a>
+            <a class="btn vk" href="https://vk.com/brushnlove" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.8 17.5c-5.8 0-9.1-4-9.2-10.6h2.9c.1 4.8 2.2 6.8 3.9 7.2V6.9h2.7v4.1c1.6-.2 3.4-2.1 4-4.1h2.7c-.4 2.6-2.3 4.5-3.6 5.2 1.3.6 3.4 2.3 4.2 5.4h-3c-.6-1.9-2.1-3.4-4.3-3.6v3.6Z"/></svg>ВКонтакте</a>
+          </div>
+          <span class="micro" style="text-align:left; margin-top:10px">Отвечаю лично в течение 15 минут в рабочее время ♥</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= PLACE ================================= -->
+  <section class="place" id="place">
+    <div class="container">
+      <div class="place-grid">
+        <div class="place-photo reveal">
+          <div class="ph ph-ratio-16-9"><span class="ph-label">Фото — студия изнутри</span></div>
+        </div>
+        <div class="glass place-card reveal">
+          <p class="eyebrow">Где находимся</p>
+          <h3>Студия в центре, уютный кабинет</h3>
+          <div class="place-line">
+            <div class="place-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><b>Адрес</b><p>Москва, ул. Малая Бронная, 24, стр. 1, 3 этаж · м. Маяковская, 5 мин пешком</p></div>
+          </div>
+          <div class="place-line">
+            <div class="place-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <div><b>Режим работы</b><p>Ежедневно 10:00–20:00. Запись на коррекции — по согласованию.</p></div>
+          </div>
+          <div class="place-line">
+            <div class="place-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></div>
+            <div><b>Телефон</b><p>+7 (999) 123-45-67 — звонок или WhatsApp</p></div>
+          </div>
+          <div class="place-cta">
+            <button class="btn" data-open-booking>Прокладываем маршрут вместе</button>
+            <span class="micro">Напишите нам — пришлём гео-метку и схему прохода ♥</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= FAQ ================================= -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">FAQ</p>
+        <h2 class="section-title">Вопросы, которые задают чаще всего</h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-q">Сколько держится наращивание?<span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">В среднем 3–4 недели (классика) и 4–5 недель (объёмы 2D/3D). Всё зависит от скорости роста твоих родных ресниц. Когда реснички начнут «уходить» — пора на коррекцию, обычно через 3–4 недели.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Это не испортит мои родные ресницы?<span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Нет, если использовать правильную технику и мягкий клей. Мы работаем «ресница к реснице», поэтому родные волоски не перегружаются и не ломаются, а под наращиванием продолжают расти в своём обычном режиме.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Сколько времени занимает процедура?<span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Первое наращивание — 1,5–2 часа. Коррекция — 1–1,5 часа. За это время можно отдохнуть, послушать музыку или даже поспать — приятный бонус процедуры.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Можно ли ходить в бассейн, сауну и на тренировки?<span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Да! Через 24–48 часов после процедуры клей полностью полимеризуется, и ресницам не страшны ни бассейн, ни сауна, ни спорт. Главное — не тереть глаза и не мочить их в первые сутки.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Не болит ли наращивание?<span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Нет. Ты лежишь с закрытыми глазами, а мастер аккуратно изолирует каждую ресничку. Единственное ощущение — лёгкое щекотание в первые минуты, к которому быстро привыкаешь. Вздремнуть получится на 100%.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Что с записью и предоплатой?<span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Запись бесплатная и без предоплаты — просто напишите нам в WhatsApp или Telegram, и мы забронируем удобное время. Если не сможете прийти, просто предупредите заранее — свободное окно передадим другим.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= MEMO ================================= -->
+  <section class="memo" id="memo">
+    <div class="container">
+      <div class="memo-card reveal">
+        <p class="eyebrow">Памятка после процедуры</p>
+        <h2>Чтобы ресницы жили долго и красиво</h2>
+        <p class="section-sub">Сохрани этот список — выдам тебе его и на бумаге после процедуры.</p>
+        <div class="memo-grid">
+          <div class="memo-item"><div class="n">1</div><p>Первые 24 часа<small>не мочить, не трогать, не ходить в баню/сауну и на спорт</small></p></div>
+          <div class="memo-item"><div class="n">2</div><p>Не тереть глаза<small>от этого и ресницы страдают, и родные волоски выпадают</small></p></div>
+          <div class="memo-item"><div class="n">3</div><p>Расчёсывать по утрам<small>специальной щёточкой, от середины к кончикам</small></p></div>
+          <div class="memo-item"><div class="n">4</div><p>Спать на спине или боку<small>лицом в подушку ресницы не любят</small></p></div>
+          <div class="memo-item"><div class="n">5</div><p>Не снимать самой<small>это делает только мастер — на коррекции или полном снятии</small></p></div>
+          <div class="memo-item"><div class="n">6</div><p>Приходить на коррекцию<small>раз в 3–4 недели, чтобы взгляд всегда оставался свежим</small></p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================================= FOOTER ================================= -->
+<footer class="site-footer" id="contacts">
+  <div class="container">
+    <div class="footer-cards">
+      <div class="ref-card reveal">
+        <h3>Приведи подругу —<br>обе получите −10%</h3>
+        <p>Скидка действует на первое наращивание для тебя и для подруги. Расскажи о студии — получишь бонус уже на следующей процедуре.</p>
+        <button class="btn" data-open-booking>Получить −10%</button>
+      </div>
+      <div class="contacts-card reveal">
+        <div class="place-line">
+          <div class="place-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></div>
+          <div class="row" style="gap:10px">+7 (999) 123-45-67</div>
+        </div>
+        <div class="place-line">
+          <div class="place-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="row" style="gap:10px">м. Маяковская · ул. Малая Бронная, 24</div>
+        </div>
+        <div class="place-line">
+          <div class="place-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <div class="row" style="gap:10px">Ежедневно 10:00–20:00</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="logo"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4 0-7-2.6-7-6.5C5 9 9 4 12 3c3 1 7 6 7 11.5 0 3.9-3 6.5-7 6.5Z"/><path d="M9.5 13.5c1.5-2.5 3.5-4 5.5-4.5"/></svg></span><span>Brush·n·Love</span></div>
+      <div class="footer-soc">
+        <a href="https://wa.me/79991234567" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://t.me/brushnlove" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://vk.com/brushnlove" target="_blank" rel="noopener">ВКонтакте</a>
+      </div>
+      <span>© 2025 Brush·n·Love · наращивание ресниц в Москве</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================================= REVIEW MODAL ================================= -->
+<div class="modal" id="reviewModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-card">
+    <button class="modal-close" data-close-modal aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="rev-stars" id="rmStars">★★★★★</div>
+    <h3 id="rmTitle">Отзыв</h3>
+    <p class="m-text" id="rmText"></p>
+    <p class="m-who" id="rmWho"></p>
+  </div>
+</div>
+
+<!-- ================================= BOOKING MODAL ================================= -->
+<div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-card">
+    <button class="modal-close" data-close-modal aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div id="bookingFormWrap">
+      <p class="eyebrow">Запись в студию</p>
+      <h3>Оставь контакт — подберём удобное время</h3>
+      <form class="modal-form" id="bookingForm" novalidate>
+        <div class="field">
+          <label for="bName">Имя</label>
+          <input id="bName" name="name" type="text" placeholder="Как к тебе обращаться?" required>
+        </div>
+        <div class="field">
+          <label for="bContact">Телефон или Telegram / WhatsApp</label>
+          <input id="bContact" name="contact" type="text" placeholder="+7 (999) 123-45-67 или @nickname" required>
+        </div>
+        <div class="field">
+          <label for="bEffect">Интересует эффект</label>
+          <select id="bEffect" name="effect">
+            <option>Классика</option>
+            <option>Мокрый</option>
+            <option>1,5D</option>
+            <option>2D</option>
+            <option>3D</option>
+            <option>Ещё не решила</option>
+          </select>
+        </div>
+        <button class="btn" type="submit" style="width:100%">Записаться</button>
+        <p class="form-note">Нажимая кнопку, ты соглашаешься на обработку персональных данных ♥</p>
+      </form>
+    </div>
+    <div id="bookingSuccess" style="display:none">
+      <div class="form-success">
+        <div class="ok">♥</div>
+        <h4>Заявка принята!</h4>
+        <p>Свяжемся с тобой в течение 15 минут в рабочее время.<br>Посмотри чат — туда прилетит свободное окно.</p>
+        <button class="btn" data-close-modal style="margin-top:20px">Хорошо</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ---------- Sticky header ----------
+  const header = document.querySelector('.site-header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  // ---------- Reveal on scroll ----------
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // ---------- Effects tabs ----------
+  const effects = {
+    classic: {
+      kicker: 'Натуральный эффект',
+      title: 'Классика',
+      price: '2 700 ₽',
+      desc: 'Одна ресница на одну родную. Максимально естественно: изменения видят все, а секрет не выдают ресницы. Идеальный выбор «на каждый день» и для первого наращивания.',
+      photo: 'Фото — Классика'
+    },
+    wet: {
+      kicker: 'Хит студии · эффект «после туши»',
+      title: 'Мокрый эффект',
+      price: '2 900 ₽',
+      desc: 'Блестящие, «залакированные» кончики — как будто ты только что накрасила ресницы и попала под капли дождя. Очень фото- и видео-дружелюбный эффект.',
+      photo: 'Фото — Мокрый эффект'
+    },
+    d15: {
+      kicker: 'Объём 1,5D',
+      title: 'Средняя густота',
+      price: '3 200 ₽',
+      desc: 'Компромисс между классикой и объёмом: ресницы заметно гуще и пушистее, но всё ещё выглядит натурально. Отличный повод «разбудить» взгляд каждый день.',
+      photo: 'Фото — 1,5D'
+    },
+    d2: {
+      kicker: 'Двойной объём 2D',
+      title: 'Эффектная густота',
+      price: '3 500 ₽',
+      desc: 'Двухкратное покрытие: каждая ресница — лёгкая, но взгляд — цепляющий. В меру драма, в меру натуральности. Часто выбирают на торжества и фотосессии.',
+      photo: 'Фото — 2D'
+    },
+    d3: {
+      kicker: 'Тройной объём 3D',
+      title: 'Кукольный объём',
+      price: '3 900 ₽',
+      desc: 'Максимальная густота для выразительного вечернего взгляда. Делаем чуть мягче форм-фактора, поэтому глаза не «отяжеляются», а красиво раскрываются.',
+      photo: 'Фото — 3D'
+    }
+  };
+  const tabs = Array.from(document.querySelectorAll('.eff-tab'));
+  const ph = document.getElementById('effPhoto');
+  const phLabel = ph.querySelector('.ph-label');
+  const k = document.getElementById('effKicker');
+  const t = document.getElementById('effTitle');
+  const p = document.getElementById('effPrice');
+  const d = document.getElementById('effDesc');
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    tabs.forEach(x => x.classList.remove('active'));
+    tab.classList.add('active');
+    const data = effects[tab.dataset.tab];
+    phLabel.textContent = data.photo;
+    k.textContent = data.kicker;
+    t.textContent = data.title;
+    p.innerHTML = data.price + '<small>коррекция — 1 300 ₽</small>';
+    d.textContent = data.desc;
+  }));
+
+  // ---------- FAQ accordion ----------
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        const a = item.querySelector('.faq-a');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ---------- Modal system ----------
+  const modals = Array.from(document.querySelectorAll('.modal'));
+  const openModal = (m) => { m.classList.add('open'); m.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; };
+  const closeModal = (m) => { m.classList.remove('open'); m.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; };
+
+  document.querySelectorAll('[data-close-modal]').forEach(b => b.addEventListener('click', () => closeModal(b.closest('.modal'))));
+  modals.forEach(m => m.addEventListener('click', (e) => { if (e.target === m) closeModal(m); }));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modals.forEach(m => { if (m.classList.contains('open')) closeModal(m); }); });
+
+  // Open bookings
+  document.querySelectorAll('[data-open-booking]').forEach(b => b.addEventListener('click', () => openModal(document.getElementById('bookingModal'))));
+
+  // Review modal
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.rev-more');
+    if (!btn) return;
+    e.preventDefault();
+    const card = btn.closest('.rev-card');
+    const full = card.querySelector('.review-full');
+    document.getElementById('rmText').textContent = full ? full.textContent.trim() : '';
+    document.getElementById('rmWho').textContent = card.querySelector('.rev-who b').textContent + ' · ' + card.querySelector('.rev-who span').textContent;
+    openModal(document.getElementById('reviewModal'));
+  });
+
+  // ---------- Booking form ----------
+  const form = document.getElementById('bookingForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('bName').value.trim();
+    const contact = document.getElementById('bContact').value.trim();
+    const effect = document.getElementById('bEffect').value;
+    if (!name || !contact) {
+      alert('Пожалуйста, заполни имя и контакт ♥');
+      return;
+    }
+    document.getElementById('bookingFormWrap').style.display = 'none';
+    document.getElementById('bookingSuccess').style.display = 'block';
+  });
+
+  // ---------- Drag-to-scroll for strips ----------
+  function makeDraggable(strip) {
+    let down = false, startX = 0, startLeft = 0, moved = 0;
+    strip.addEventListener('pointerdown', (e) => {
+      down = true; moved = 0; startX = e.clientX; startLeft = strip.scrollLeft;
+      strip.classList.add('dragging');
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      moved = Math.max(moved, Math.abs(dx));
+      strip.scrollLeft = startLeft - dx;
+    });
+    const stop = () => { down = false; strip.classList.remove('dragging'); };
+    window.addEventListener('pointerup', stop);
+    window.addEventListener('pointercancel', stop);
+    strip.addEventListener('click', (e) => {
+      if (moved > 6) { e.preventDefault(); e.stopImmediatePropagation(); }
+    }, true);
+  }
+  makeDraggable(document.getElementById('portfolioStrip'));
+  makeDraggable(document.getElementById('revStrip'));
+
+  // ---------- Video autoplay on scroll ----------
+  const videos = Array.from(document.querySelectorAll('video[data-src]'));
+  videos.forEach(v => { v.src = v.dataset.src; });
+  const vv = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      const v = en.target;
+      if (en.isIntersecting) v.play().catch(() => {});
+      else v.pause();
+    });
+  }, { threshold: 0.45 });
+  videos.forEach(v => vv.observe(v));
+})();
+</script>
+</body>
+</html>
