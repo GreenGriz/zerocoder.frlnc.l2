@@ -577,6 +577,12 @@ section{ padding:72px 0; }
   box-shadow:0 0 0 4px rgba(192,138,94,.15);
 }
 .form-note{ font-size:12px; color:var(--ink-soft); text-align:center; }
+.form-note a{ color:var(--accent-deep); font-weight:700; border-bottom:1px dashed rgba(169,113,74,.5); }
+.form-frame-wrap{
+  margin-top:18px; border-radius:20px; overflow:hidden;
+  border:1px solid var(--line); background:#fff;
+}
+.form-frame{ display:block; width:100%; height:min(66vh, 620px); border:none; }
 .form-success{ text-align:center; padding:20px 0 10px; }
 .form-success .ok{
   width:72px; height:72px; margin:0 auto 18px; border-radius:50%;
@@ -1116,37 +1122,10 @@ section{ padding:72px 0; }
     <div id="bookingFormWrap">
       <p class="eyebrow">Запись в студию</p>
       <h3>Оставь контакт — подберём удобное время</h3>
-      <form class="modal-form" id="bookingForm" novalidate>
-        <div class="field">
-          <label for="bName">Имя</label>
-          <input id="bName" name="name" type="text" placeholder="Как к тебе обращаться?" required>
-        </div>
-        <div class="field">
-          <label for="bContact">Телефон или Telegram / WhatsApp</label>
-          <input id="bContact" name="contact" type="text" placeholder="+7 (999) 123-45-67 или @nickname" required>
-        </div>
-        <div class="field">
-          <label for="bEffect">Интересует эффект</label>
-          <select id="bEffect" name="effect">
-            <option>Классика</option>
-            <option>Мокрый</option>
-            <option>1,5D</option>
-            <option>2D</option>
-            <option>3D</option>
-            <option>Ещё не решила</option>
-          </select>
-        </div>
-        <button class="btn" type="submit" style="width:100%">Записаться</button>
-        <p class="form-note">Нажимая кнопку, ты соглашаешься на обработку персональных данных ♥</p>
-      </form>
-    </div>
-    <div id="bookingSuccess" style="display:none">
-      <div class="form-success">
-        <div class="ok">♥</div>
-        <h4>Заявка принята!</h4>
-        <p>Свяжемся с тобой в течение 15 минут в рабочее время.<br>Посмотри чат — туда прилетит свободное окно.</p>
-        <button class="btn" data-close-modal style="margin-top:20px">Хорошо</button>
+      <div class="form-frame-wrap">
+        <iframe class="form-frame" id="bookingFrame" title="Форма записи в студию" loading="lazy"></iframe>
       </div>
+      <p class="form-note" style="margin-top:12px">Форма откроется в окне на этой странице. Если не загрузилась — <a id="bookingFallbackLink" href="https://forms.yandex.ru/u/6ac1e4fcf47e734131049876/" target="_blank" rel="noopener">открыть в новой вкладке</a>.</p>
     </div>
   </div>
 </div>
@@ -1239,16 +1218,29 @@ section{ padding:72px 0; }
   });
 
   // ---------- Modal system ----------
+  const YANDEX_FORM_ID = '6ac1e4fcf47e734131049876';
+  const YANDEX_FORM_URL = 'https://forms.yandex.ru/u/' + YANDEX_FORM_ID + '/';
+  const bookingFrame = document.getElementById('bookingFrame');
+  const bookingFallbackLink = document.getElementById('bookingFallbackLink');
+  bookingFallbackLink.href = YANDEX_FORM_URL;
+
   const modals = Array.from(document.querySelectorAll('.modal'));
   const openModal = (m) => { m.classList.add('open'); m.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; };
-  const closeModal = (m) => { m.classList.remove('open'); m.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; };
+  const closeModal = (m) => {
+    m.classList.remove('open'); m.setAttribute('aria-hidden', 'true'); document.body.style.overflow = '';
+    if (m.id === 'bookingModal') bookingFrame.removeAttribute('src');
+  };
 
   document.querySelectorAll('[data-close-modal]').forEach(b => b.addEventListener('click', () => closeModal(b.closest('.modal'))));
   modals.forEach(m => m.addEventListener('click', (e) => { if (e.target === m) closeModal(m); }));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modals.forEach(m => { if (m.classList.contains('open')) closeModal(m); }); });
 
   // Open bookings
-  document.querySelectorAll('[data-open-booking]').forEach(b => b.addEventListener('click', () => openModal(document.getElementById('bookingModal'))));
+  document.querySelectorAll('[data-open-booking]').forEach(b => b.addEventListener('click', () => {
+    if (location.protocol === 'file:') { window.open(YANDEX_FORM_URL, '_blank'); return; }
+    bookingFrame.src = YANDEX_FORM_URL;
+    openModal(document.getElementById('bookingModal'));
+  }));
 
   // Review modal
   document.addEventListener('click', (e) => {
@@ -1260,21 +1252,6 @@ section{ padding:72px 0; }
     document.getElementById('rmText').textContent = full ? full.textContent.trim() : '';
     document.getElementById('rmWho').textContent = card.querySelector('.rev-who b').textContent + ' · ' + card.querySelector('.rev-who span').textContent;
     openModal(document.getElementById('reviewModal'));
-  });
-
-  // ---------- Booking form ----------
-  const form = document.getElementById('bookingForm');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('bName').value.trim();
-    const contact = document.getElementById('bContact').value.trim();
-    const effect = document.getElementById('bEffect').value;
-    if (!name || !contact) {
-      alert('Пожалуйста, заполни имя и контакт ♥');
-      return;
-    }
-    document.getElementById('bookingFormWrap').style.display = 'none';
-    document.getElementById('bookingSuccess').style.display = 'block';
   });
 
   // ---------- Drag-to-scroll for strips ----------
