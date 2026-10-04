@@ -1,0 +1,12 @@
+# OpenCode — локальная директория, в репозиторий не идёт
+.opencode/
+
+# OS / редакторы
+.DS_Store
+Thumbs.db
+*~
+.idea/
+.vscode/
+
+# логи
+*.log
